@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/mRelativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:background="@color/white"
+                tools:context=".fragments.EyeFragment">
+
+    <RelativeLayout
+            android:id="@+id/mRelativeLayoutTwo"
+            android:layout_width="350dp"
+            android:layout_height="550dp"
+            android:layout_marginStart="90dp"
+            android:gravity="start"
+            android:layout_marginLeft="90dp">
+
+        <ImageView
+                android:id="@+id/mEyeBallLeft"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="90dp"
+                android:background="@drawable/circle_two"
+                android:contentDescription="@null"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/mRelativeLayoutThree"
+            android:layout_width="350dp"
+            android:layout_height="550dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="60dp"
+            android:gravity="start"
+            android:layout_marginRight="60dp"
+            android:layout_alignParentRight="true">
+
+
+        <ImageView
+                android:id="@+id/mEyeBallRight"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="90dp"
+                android:background="@drawable/circle_two"
+                android:contentDescription="@null"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

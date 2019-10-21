@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Arya</string>
+
+    <string name="hello_everyone">Hello Everyone</string>
+    <string name="imarya">I\'m Arya</string>
+    <string name="welcometococubes">Welcome To CoCubes</string>
+    <string name="helloimarya">Hello, I\'m Arya</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
