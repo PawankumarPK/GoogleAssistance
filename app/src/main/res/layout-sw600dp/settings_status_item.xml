@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:background="@color/grey"
+        android:textAlignment="center"
+        app:cardCornerRadius="5dp">
+
+    <CheckBox
+            android:id="@+id/mCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:button="@drawable/connect_disconnect_checkbox" />
+
+    <TextView
+            android:id="@+id/mCheckTextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="50dp"
+            android:text="Setting"
+            android:textColor="@color/black"
+            android:textSize="@dimen/ItemsTextSizeTab" />
+
+</RelativeLayout>

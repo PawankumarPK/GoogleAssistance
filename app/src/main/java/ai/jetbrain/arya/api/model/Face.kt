@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 class Face {
 
     @SerializedName("face")
-    var faceRecog : EyePosition? = null
+    var face: EyePosition? = null
 }

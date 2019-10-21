@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="none">
+
+
+    <RelativeLayout
+            android:id="@+id/mRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:id="@+id/mBatterAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/settingsBackBtn"
+                android:src="@drawable/ic_battery_alert"
+                android:contentDescription="@null"/>
+
+        <ImageView
+                android:id="@+id/mBatterCharging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/settingsBackBtn"
+                android:src="@drawable/ic_battery_charging"
+                android:contentDescription="@null"/>
+
+
+        <Button
+                android:id="@+id/settingsBackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                android:background="@drawable/grey_gradients"
+                android:contentDescription="@null"
+                android:text="Back"
+                android:textColor="@drawable/button_text_color" />
+
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mRelativeLayout" />
+
+</RelativeLayout>

@@ -1,10 +1,55 @@
 <resources>
     <string name="app_name">Arya</string>
+    <string name="admin_description">Jetbrain Admin</string>
+    <string name="screen_select_preference">screenSelectPref</string>
 
-    <string name="hello_everyone">Hello Everyone</string>
-    <string name="imarya">I\'m Arya</string>
-    <string name="welcometococubes">Welcome To CoCubes</string>
-    <string name="helloimarya">Hello, I\'m Arya</string>
+    <string-array name="responses">
+        <item>"Hello, How are you?"</item>
+        <item>"I'm Fine. How about you?"</item>
+        <item>"I was made at Jetbrain Robotics."</item>
+        <item>"its 12 august 2019"</item>
+        <item>"There are many excercises out there. Mine is really "taking fresh air"</item>
+        <item>"I recommend you to stay fit and healthy.
+            I recommend you to drink a lot of water everyday.
+            I recommend having faith in positive behaviours"</item>
+        <item>"the main reason I’m on here is to just meet some cool people
+            with no expectations and see where things go."</item>
+        <item>"My self Arya, I belong from jetbrain robotics.
+            I love to recommend people you to stay fit and healthy.
+            That's all about me."</item>
+        <item>"Yes. It's Jesus."</item>
+
+    </string-array>
+    <string-array name="queries">
+        <item>"Hello!|hello|home|hallo|helo|yellow"</item>
+        <item>"How are you?|how are you|how r u|how are u|how r you|howryou|are you"</item>
+        <item>
+            "created due|who made you|whom made u|who made|who made u|who made new
+            |created new|created you|invented you|who created due|to create a due
+            |who invented You|who invented new|who invented Yu|created a new|create a due
+            |who invented Diu|created u"
+        </item>
+        <item>"what is the date today | what is the day today | wat is the date today "</item>
+        <item>"What Is Your Favorite Type Of exercise | What Is Your Favorite Type Of exercise"</item>
+        <item>"Name three things you really want to recommend to me"</item>
+        <item>"why are you here | why are you here here | why are you dear | why are you there | why are you hearing | why are you hear me"</item>
+        <item>"tell me about yourself | tell me about your self | tel me about yourself | chal me about yourself"</item>
+        <item>"Do you have boyfriend | do u have a boyfriend | 2 you have a boyfriend "</item>
+
+        <item>"how i'm looking | how i'm looking | how am looking | how do i am looking"</item>
+
+    </string-array>
+    <string name="error_response">"I'm sorry, I didn't get that."</string>
+    <string name="welcome_start_text">"Hello, I'm ARYA. "</string>
+
+    <string-array name="welcome_text">
+        <item>"Welcome to Aon CoCubes exclusive partner event – Connect 2019."</item>
+        <item>"Its an honor and privilege to have your presence at Connect 2019."</item>
+        <item>"Thank you for partnering with us and creating “Equal Opportunity” for every student."</item>
+        <item>"Thank you for the trust you have bestowed in us."</item>
+        <item>"We look forward to a great 2020 placement season."</item>
+        <item>"Here’s hoping you have a memorable experience at Connect 2019."</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

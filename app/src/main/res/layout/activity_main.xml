@@ -4,13 +4,35 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activitys.MainActivity">
+        tools:context=".activity.BaseActivity"
+        android:id="@+id/mainLayout"
+        android:keepScreenOn="true">
 
-    <FrameLayout
+
+    <LinearLayout
             android:id="@+id/mFrameContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:weightSum="10">
 
-    </FrameLayout>
+        <Button
+                android:id="@+id/btnScreen1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/white"
+                android:text="Face Screen"
+        />
+        <Button
+                android:id="@+id/btnScreen2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/colorPrimary"
+                android:text="Welcome Screen"
+        />
+
+    </LinearLayout>
+
 
 </RelativeLayout>
