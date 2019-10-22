@@ -1,9 +1,7 @@
 package ai.jetbrain.arya.fragment
 
 
-import ai.jetbrain.arya.BatteryInfoReceiver
 import ai.jetbrain.arya.R
-import ai.jetbrain.arya.activity.BaseActivity
 import ai.jetbrain.arya.adapter.SettingsAdapter
 import ai.jetbrain.arya.api.DeviceStats
 import android.content.Intent
@@ -15,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -25,7 +22,7 @@ class SettingsFragment : BaseFragment() {
     private var loop = false
     private val handler = Handler()
     private var runnable: Runnable? = null
-    private var name  = ""
+    private var name = ""
 
     enum class SettingType {
         Status,
@@ -57,7 +54,11 @@ class SettingsFragment : BaseFragment() {
 
     private var adapter: SettingsAdapter = SettingsAdapter(itemList)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 

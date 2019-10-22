@@ -2,7 +2,6 @@ package ai.jetbrain.arya
 
 
 import ai.jetbrain.arya.api.DeviceStats
-import ai.jetbrain.arya.fragment.SettingsFragment
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent

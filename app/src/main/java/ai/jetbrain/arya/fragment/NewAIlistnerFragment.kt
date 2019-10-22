@@ -18,7 +18,11 @@ class NewAIlistnerFragment : BaseFragment(), AIListener {
 
     private var aiService: AIService? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_new_ailistner, container, false)
     }
 
@@ -80,7 +84,8 @@ class NewAIlistnerFragment : BaseFragment(), AIListener {
                     .append(value).append(") ")
             }
         }
-        resultTextView.text = ("\n Output: " + result1.fulfillment.speech + "\n You: " + result1.resolvedQuery)
+        resultTextView.text =
+            ("\n Output: " + result1.fulfillment.speech + "\n You: " + result1.resolvedQuery)
 
     }
 
