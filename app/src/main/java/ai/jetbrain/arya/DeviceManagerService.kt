@@ -34,7 +34,7 @@ class DeviceManagerService : IntentService("DeviceManagerService") {
 
                     DeviceStats.ServerConnected = true
                     DeviceStats.Battery = deviceStatsModel.Battery!!
-                    Log.d("--->","${DeviceStats.Battery}")
+                    Log.d("--->", "${DeviceStats.Battery}")
                     //  Toast.makeText(applicationContext,"Success",Toast.LENGTH_SHORT).show()
                     Handler().postDelayed({
                         getDeviceStats()
@@ -44,7 +44,7 @@ class DeviceManagerService : IntentService("DeviceManagerService") {
             }
         })
 
-        Log.d("DMS--->","${DeviceStats.Battery}")
+        Log.d("DMS--->", "${DeviceStats.Battery}")
     }
 
     override fun onHandleIntent(intent: Intent?) {
