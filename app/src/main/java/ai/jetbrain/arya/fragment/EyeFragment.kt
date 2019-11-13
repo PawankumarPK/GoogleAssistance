@@ -117,7 +117,7 @@ class EyeFragment : BaseFragment() {
     }
 
 
-    private fun randomMoves() {
+   /** private fun randomMoves() {
         val rand = Random()
         val x = rand.nextFloat() * eyeMaxX
         val y = rand.nextFloat() * eyeMaxY
@@ -131,7 +131,7 @@ class EyeFragment : BaseFragment() {
         }, (rand.nextInt(max) + defaultDuration).toLong())
 
     }
-
+*/
     private fun moveEyeBall(target: ImageView, targetX: Float, targetY: Float) {
         val animSetXY = AnimatorSet()
         val x = ObjectAnimator.ofFloat(target, "translationX", eyeX, targetX)
@@ -145,8 +145,6 @@ class EyeFragment : BaseFragment() {
     override fun onFaceUpdate(facex: Float, facey: Float) {
         super.onFaceUpdate(facex, facey)
 
-        Log.d("faceUpadet","----->>>>")
-
         var x = facex
         var y = facey
         if (x < 0 || x > 1) x = 0.5F
@@ -158,10 +156,7 @@ class EyeFragment : BaseFragment() {
 
         if (eyeX != x || eyeY != y) {
             moveEyeBall(mEyeBallLeft, x, y)
-//            moveEyeBall(mEyeBallLeftLine, x, y)
-
             moveEyeBall(mEyeBallRight, x, y)
-            //          moveEyeBall(mEyeBallRightLine, x, y)
             eyeX = x
             eyeY = y
 
