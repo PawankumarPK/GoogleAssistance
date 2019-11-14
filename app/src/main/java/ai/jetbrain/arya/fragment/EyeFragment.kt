@@ -45,9 +45,6 @@ class EyeFragment : BaseFragment() {
         observeLayoutLoad()
         // randomMoves()
 
-        mRelativeLayout.setOnClickListener {
-            listen()
-        }
         // blinkAnimationEyeLeft()
         blinkEye()
     }
