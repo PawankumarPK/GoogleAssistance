@@ -48,12 +48,21 @@ class WelcomeFragment : BaseFragment(), AIListener {
 
     private fun initSTT(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            var check = ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+            var check =
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
             if (check == PackageManager.PERMISSION_GRANTED) {
 
             } else {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO))
-                    Toast.makeText(activity, "App required access to audio", Toast.LENGTH_SHORT).show();
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        activity,
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                )
+                    Toast.makeText(
+                        activity,
+                        "App required access to audio",
+                        Toast.LENGTH_SHORT
+                    ).show();
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -63,7 +72,11 @@ class WelcomeFragment : BaseFragment(), AIListener {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(ai.jetbrain.arya.R.layout.fragment_welcome_screen, container, false)
     }
 
@@ -73,7 +86,7 @@ class WelcomeFragment : BaseFragment(), AIListener {
         initSTT(baseActivity)
         setSpeechAIConfig()
         mRelativeLayout.setOnClickListener {
-            onFaceUpdate(0.5F,0.5F)
+            onFaceUpdate(0.5F, 0.5F)
         }
         mSettings.setOnClickListener { showSettingsFragment() }
         Speech.setOnCompleteListener { onSpeechComplete() }
@@ -97,14 +110,15 @@ class WelcomeFragment : BaseFragment(), AIListener {
     }
 
     private fun showSettingsFragment() {
-        fragmentManager!!.beginTransaction().replace(ai.jetbrain.arya.R.id.mFrameContainer, fragment)
+        fragmentManager!!.beginTransaction()
+            .replace(ai.jetbrain.arya.R.id.mFrameContainer, fragment)
             .addToBackStack(null).commit()
     }
 
     override fun onFaceUpdate(facex: Float, facey: Float) {
         super.onFaceUpdate(facex, facey)
         if (facex > 0 && facex < 1 && facey > 0 && facey < 1) {
-            if(!isBusy) {
+            if (!isBusy) {
                 if (CheckNetwork.isInternetAvailable(baseActivity)) {
                     isBusy = true
                     if ((System.currentTimeMillis().toInt() - lastSpeechStamp) > 5000) {
@@ -137,8 +151,8 @@ class WelcomeFragment : BaseFragment(), AIListener {
             aiService!!.startListening()
             delayHandler.removeCallbacksAndMessages(null)
             delayHandler.postDelayed({
-                if(isListening) aiService!!.cancel();
-            },10000)
+                if (isListening) aiService!!.cancel();
+            }, 10000)
             textUpdate("Listening...")
         }
     }
