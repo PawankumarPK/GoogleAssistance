@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 
 
-open class BaseFragment : Fragment() {
+open class BaseFragment : Fragment(){
 
     protected lateinit var baseActivity: BaseActivity
 
@@ -24,11 +24,7 @@ open class BaseFragment : Fragment() {
         initSpeechAndText()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Speech.onPermissionResult(requestCode, grantResults[0])
     }

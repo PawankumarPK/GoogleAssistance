@@ -6,7 +6,6 @@ import ai.api.AIListener
 import ai.api.android.AIService
 import ai.api.model.AIError
 import ai.api.model.AIResponse
-import ai.jetbrain.arya.R
 import ai.jetbrain.arya.SttUtils.Speech
 import ai.jetbrain.arya.activity.BaseActivity
 import ai.jetbrain.arya.utils.CheckNetwork
@@ -35,10 +34,17 @@ class WelcomeFragment : BaseFragment(), AIListener {
     private val REQUEST_AUDIO_PERMISSION_REQ_ID = 1
 
     private var isBusy = false
-    private  var isListening = false
+    private var isSpeaking = false
+    private var isListening = false
 
     private val defaultText = "Hello, I'm ARYA"
-    private val defaultErrorText = "Sorry. I'm having some trouble."
+    private val defaultText2 = "Welcome to The Signature Hospital."
+    private val defaultSpeechErrorText = "Sorry, I didn't get that."
+    private val defaultErrorText = "Sorry. I'm having trouble connecting to the Internet."
+
+    private var lastSpeechStamp = System.currentTimeMillis().toInt()
+
+    private val delayHandler = Handler()
 
     private fun initSTT(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -58,7 +64,7 @@ class WelcomeFragment : BaseFragment(), AIListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_welcome_screen, container, false)
+        return inflater.inflate(ai.jetbrain.arya.R.layout.fragment_welcome_screen, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,18 +72,17 @@ class WelcomeFragment : BaseFragment(), AIListener {
         baseActivity = activity as BaseActivity
         initSTT(baseActivity)
         setSpeechAIConfig()
-        mRelativeLayout.setOnClickListener { listen() }
-        mSettings.setOnClickListener { showSettingsFragment() }
-        Speech.setOnCompleteListener {
-            isBusy = false
-            watchForResetText()
+        mRelativeLayout.setOnClickListener {
+            onFaceUpdate(0.5F,0.5F)
         }
+        mSettings.setOnClickListener { showSettingsFragment() }
+        Speech.setOnCompleteListener { onSpeechComplete() }
     }
 
     private fun watchForResetText() {
         baseActivity.runOnUiThread {
             Handler().postDelayed({
-                if (!isBusy) textUpdate(defaultText)
+                if (!isBusy && !isSpeaking && !isListening) textUpdate(defaultText)
             }, 5000)
         }
     }
@@ -85,12 +90,6 @@ class WelcomeFragment : BaseFragment(), AIListener {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         fragmentIsVisible = isVisibleToUser
-        /*
-        if (fragmentIsVisible)
-            internetHandler()
-        else
-            handler.removeCallbacksAndMessages(null)
-        */
     }
 
     private fun textUpdate(txt: String) {
@@ -98,28 +97,46 @@ class WelcomeFragment : BaseFragment(), AIListener {
     }
 
     private fun showSettingsFragment() {
-        fragmentManager!!.beginTransaction().replace(R.id.mFrameContainer, fragment)
+        fragmentManager!!.beginTransaction().replace(ai.jetbrain.arya.R.id.mFrameContainer, fragment)
             .addToBackStack(null).commit()
     }
 
     override fun onFaceUpdate(facex: Float, facey: Float) {
         super.onFaceUpdate(facex, facey)
         if (facex > 0 && facex < 1 && facey > 0 && facey < 1) {
-            if(CheckNetwork.isInternetAvailable(baseActivity)) {
-                listen()
-            }
-            else {
-                textUpdate("I'm having trouble connecting to internet.")
+            if(!isBusy) {
+                if (CheckNetwork.isInternetAvailable(baseActivity)) {
+                    isBusy = true
+                    if ((System.currentTimeMillis().toInt() - lastSpeechStamp) > 5000) {
+                        welcome()
+                    } else listen()
+                } else onNetworkError()
             }
         }
     }
 
+    private fun onNetworkError() {
+        Speech.speakOutText(defaultErrorText)
+        textUpdate(defaultErrorText)
+    }
+
+    private fun welcome() {
+        if (!isSpeaking) {
+            isSpeaking = true
+            baseActivity.muteSound(false)
+            var txt = defaultText
+            if (Math.random() > 0.5) txt = defaultText2
+            textUpdate(txt)
+            Speech.speakOutText(txt)
+        }
+    }
+
     private fun listen() {
-        if (!isBusy) {
-            isBusy = true
+        if (!isListening) {
             isListening = true
             aiService!!.startListening()
-            Handler().postDelayed({
+            delayHandler.removeCallbacksAndMessages(null)
+            delayHandler.postDelayed({
                 if(isListening) aiService!!.cancel();
             },10000)
             textUpdate("Listening...")
@@ -136,16 +153,6 @@ class WelcomeFragment : BaseFragment(), AIListener {
         aiService!!.setListener(this)
     }
 
-    override fun onResult(response: AIResponse) {
-        getResultInText(response)
-    }
-
-    override fun onError(error: AIError) {
-        textUpdate(defaultErrorText)
-        isBusy = false
-        watchForResetText()
-    }
-
     override fun onAudioLevel(level: Float) {
 
     }
@@ -155,24 +162,35 @@ class WelcomeFragment : BaseFragment(), AIListener {
         listen()
     }
 
-    override fun onListeningCanceled() {
-        isBusy = false
-        isListening = false
-        textUpdate(defaultText)
-    }
-
     override fun onListeningFinished() {
         baseActivity.muteSound(true)
         isListening = false
     }
 
-    private fun getResultInText(response: AIResponse) {
+    override fun onListeningCanceled() {
+        isListening = false
+        isBusy = false
+        textUpdate(defaultText)
+    }
+
+    override fun onResult(response: AIResponse) {
         baseActivity.muteSound(false)
-        val resultResponse = response.result
-        val result = resultResponse.fulfillment.speech
-        mVoiceResult.text = result
-        Speech.speakOutText(result)
+        val result = response.result.fulfillment.speech
         textUpdate(result)
+        Speech.speakOutText(result)
+    }
+
+    override fun onError(error: AIError) {
+        isListening = false
+        isBusy = false
+        lastSpeechStamp = System.currentTimeMillis().toInt()
+    }
+
+    private fun onSpeechComplete() {
+        isSpeaking = false
+        isBusy = false
+        lastSpeechStamp = System.currentTimeMillis().toInt()
+        watchForResetText()
     }
 
     override fun onDetach() {
