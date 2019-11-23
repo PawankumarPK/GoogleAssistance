@@ -30,7 +30,6 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment_battery_chg.*
 import kotlinx.android.synthetic.main.fragment_welcome_screen.*
 import kotlinx.android.synthetic.main.fragment_welcome_screen.mRelativeLayout
-import java.lang.Exception
 
 
 class WelcomeFragment : BaseFragment(), AIListener {
@@ -56,12 +55,21 @@ class WelcomeFragment : BaseFragment(), AIListener {
 
     private fun initSTT(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            var check = ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
+            var check =
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECORD_AUDIO)
             if (check == PackageManager.PERMISSION_GRANTED) {
 
             } else {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.RECORD_AUDIO))
-                    Toast.makeText(activity, "App required access to audio", Toast.LENGTH_SHORT).show();
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        activity,
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                )
+                    Toast.makeText(
+                        activity,
+                        "App required access to audio",
+                        Toast.LENGTH_SHORT
+                    ).show();
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -71,7 +79,11 @@ class WelcomeFragment : BaseFragment(), AIListener {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(ai.jetbrain.arya.R.layout.fragment_welcome_screen, container, false)
     }
 
@@ -214,7 +226,7 @@ class WelcomeFragment : BaseFragment(), AIListener {
             val result = response.result.fulfillment.speech
             textUpdate(result)
             Speech.speakOutText(result)
-        }catch (e : Exception){
+        } catch (e: Exception) {
             Toast.makeText(baseActivity, "Response Exception!!", Toast.LENGTH_SHORT).show()
             textUpdate("I'm having trouble to connect internet")
         }
