@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="ai.jetbrain.arya">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -26,18 +30,22 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".BatteryInfoReceiver">
+        <receiver android:name=".receivers.BatteryInfoReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED" />
             </intent-filter>
         </receiver>
 
         <service
-                android:name=".FaceTrackService"
+                android:name=".services.FaceTrackService"
                 android:exported="false"/>
 
         <service
-                android:name=".DeviceManagerService"
+                android:name=".services.DeviceManagerService"
+                android:exported="false"/>
+
+        <service
+                android:name=".services.BatteryStatsService"
                 android:exported="false"/>
 
         <activity android:name=".activity.BaseActivity"
@@ -53,5 +61,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>
