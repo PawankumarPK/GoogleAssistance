@@ -2,12 +2,12 @@ package ai.jetbrain.arya.api
 
 object DeviceStats {
 
-    var ServerConnected:Boolean = false
+    var ServerConnected: Boolean = false
 
-    var ScreenBattery:Int = 0
+    var ScreenBattery: Int = 0
 
-    var Battery:Float = 0.0F
+    var Battery: Float = 0.0F
 
-    var ChargingState:Boolean = false
+    var ChargingState: Boolean = false
 
 }

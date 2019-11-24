@@ -9,9 +9,9 @@ object RetrofitClient {
 
     fun init(baseURLs: String) {
         val retrofitInstance = Retrofit.Builder()
-                .baseUrl(baseURLs)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(baseURLs)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
         apiService = retrofitInstance.create(ApiService::class.java)
     }

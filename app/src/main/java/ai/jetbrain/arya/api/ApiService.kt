@@ -15,5 +15,4 @@ interface ApiService {
     fun deviceStats(): Call<DeviceStatsModel>
 
 
-
 }
